@@ -18,6 +18,7 @@ The client folder contains a [react app](https://reactjs.org/) using [vite](http
 2. Run `npm install` to install all the depedencies
 3. Run `npm run dev` to start the application
 4. Now you should be able to visit the app at http://127.0.0.1:5173/
+5. Note: To access the APIs running on localhost, go to `client/src/server.js` and replace the `baseURL` with `http://localhost:3042`.
 
 ### Server
 
@@ -30,3 +31,13 @@ The server folder contains a node.js server using [express](https://expressjs.co
 The application should connect to the default server port (3042) automatically!
 
 _Hint_ - Use [nodemon](https://www.npmjs.com/package/nodemon) instead of `node` to automatically restart the server on any changes.
+
+### What have I done?
+
+I have made the application request access to connect to you metamask wallet. Once you connect your wallet to the application, your address gets auto-populated in the **Wallet Address** input field of the Wallet component. Then you can click on the **Add Account** button and this address's balance will get initiated to 100. You can now transfer this balance to any account after signing the transaction.
+
+### Behind the Scenes
+
+Once you click the **Transfer** button, MetaMask requests your signature. This signature is then sent to the server where the public key of this address is derived using the `ethereum-cryptography` library and the signature is verified using the `verify()` function. If the signature is valid, then the balances of the sender and recipient are updated.
+
+The live application is available at: https://au-ecdsa-node-dapp.onrender.com/
